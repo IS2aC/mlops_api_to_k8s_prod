@@ -1,0 +1,23 @@
+# Ignorer les fichiers et dossiers inutiles pour le build
+.git
+.gitignore
+.github/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+.env
+venv/
+env/
+.mypy_cache/
+__MACOSX/
+.DS_Store
+
+# Logs et caches
+*.log
+*.tmp
+
+# Fichiers de dev ou de test
+tests/
+notebooks/
