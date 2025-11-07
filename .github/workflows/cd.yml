@@ -28,9 +28,8 @@ jobs:
           sudo apt-get install -y unzip wget
           wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.0.4584-linux-x64.zip
           unzip sonar-scanner-cli-6.2.0.4584-linux-x64.zip
-          mkdir sonar-scanner
-          sudo mv sonar-scanner-cli-6.2.0.4584-linux-x64 sonar-scanner
-          echo "/sonar-scanner/bin" >> $GITHUB_PATH
+          sudo mv sonar-scanner-6.2.0.4584-linux-x64/ sonar/
+          echo "sonar/bin" >> $GITHUB_PATH
 
 
       # ✅ Étape 4 : Exécuter l'analyse SonarCloud
