@@ -38,7 +38,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=is2ac
-            -Dsonar.organization=is2ac_mlops_api_to_k8s_prod
+            -Dsonar.organization=Isaac Emmanuel Yao
         env:
           SONAR_TOKEN: ${{ secrets.SONARQUBE_SECRET }}
 
