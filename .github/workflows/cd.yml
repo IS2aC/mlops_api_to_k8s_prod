@@ -26,9 +26,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y unzip wget
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-6.2.0.4377-linux.zip
-          unzip sonar-scanner-6.2.0.4377-linux.zip
-          sudo mv sonar-scanner-6.2.0.4377-linux /opt/sonar-scanner
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.0.4584-linux-x64.zip
+          unzip sonar-scanner-cli-6.2.0.4584-linux-x64.zip
+          sudo mv sonar-scanner-cli-6.2.0.4584-linux-x64 /opt/sonar-scanner
           echo "/opt/sonar-scanner/bin" >> $GITHUB_PATH
 
 
