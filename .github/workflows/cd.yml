@@ -37,8 +37,8 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         with:
           args: >
-            -Dsonar.projectKey=is2ac
-            -Dsonar.organization=Isaac Emmanuel Yao
+            -Dsonar.projectKey=mlops_api_to_k8s_prod
+            -Dsonar.organization=is2ac
         env:
           SONAR_TOKEN: ${{ secrets.SONARQUBE_SECRET }}
 
