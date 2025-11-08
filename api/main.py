@@ -12,7 +12,7 @@ def root():
 
 @app.get('/version')
 def apiversion():
-    return {"api-version": "1.0.0"}
+    return {"api-version": "6.6.6"}
 
 
 @app.get("/hello/{name}")
