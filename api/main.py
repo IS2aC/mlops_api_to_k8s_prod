@@ -10,6 +10,11 @@ def root():
     return {"message": "FastAPI is running!"}
 
 
+@app.get('/version')
+def apiversion():
+    return {"api-version": "1.0.0"}
+
+
 @app.get("/hello/{name}")
 def hello(name: str):
     message = say_hello(name)
