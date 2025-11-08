@@ -14,35 +14,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Étape 2 : Configurer Java (Sonar nécessite un JDK)
-      - name: Set up JDK (required by Sonar)
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+      # --- DÉBUT DES NOUVELLES ÉTAPES FLAKE8 ---
 
-      # ✅ Étape 3 : Installer le sonar-scanner CLI
-      - name: Install SonarScanner CLI
+      # Étape 2 : Configurer l'environnement Python
+      # Flake8 est un outil Python. Nous configurons la version pour l'environnement de la CI.
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x' # Utilise la dernière version stable de Python 3
+
+      # Étape 3 : Installer Flake8 (et les dépendances du projet si nécessaire)
+      - name: Install dependencies and Flake8
         run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip wget
-          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.0.4584-linux-x64.zip
-          unzip sonar-scanner-cli-6.2.0.4584-linux-x64.zip
-          sudo mv sonar-scanner-6.2.0.4584-linux-x64/ sonar/
-          echo "sonar/bin" >> $GITHUB_PATH
+          python -m pip install --upgrade pip
+          pip install flake8
+          # Si votre code dépend d'un requirements.txt, décommentez la ligne ci-dessous :
+          # pip install -r requirements.txt
+          
+      # Étape 4 : Exécuter l'analyse de qualité Flake8
+      # Le point (.). analyse tous les fichiers Python dans le répertoire courant.
+      # L'étape échouera si Flake8 trouve des erreurs ou des avertissements majeurs (le code 
+      # n'est pas construit si le linter échoue).
+      - name: Run Flake8 code quality checks
+        run: |
+          echo "Démarrage de l'analyse de qualité Flake8..."
+          flake8 . --count --show-source --statistics
+          echo "Analyse Flake8 terminée avec succès."
 
-
-      # ✅ Étape 4 : Exécuter l'analyse SonarCloud
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
-        with:
-          args: >
-            -Dsonar.projectKey=mlops_api_to_k8s_prod
-            -Dsonar.organization=is2ac
-            -Dsonar.branch.name=main
-        env:
-          SONAR_TOKEN: ${{ secrets.SONARQUBE_SECRET }}
-
+      # --- FIN DES ÉTAPES FLAKE8 ---
+      
       # Étape 5 : Se connecter à Docker Hub
       - name: Login to Docker Hub
         uses: docker/login-action@v3
